@@ -1,0 +1,75 @@
+backend notes
+npm init -y
+npm i express mongoose dotenv
+touch server.js .env .gitignore
+add node_modules.env to gitignore
+
+change in package.json:
+from:
+"main": "index.js", 
+to:
+"main": "server.js",
+
+
+in server.js
+// Imports
+const express = require('express')
+const app = express()
+require('dotenv').config()
+
+// ===== PORT =====
+const port = 8080
+
+app.listen(port, () => console.log(`Express app running on port ${port}`))
+
+run nodemon in terminal should say, "[nodemon] starting `node server.js`
+Express app running on port 8080"
+
+(we should should start with Video.js and ... before User.js because user.js is the most involved)
+make User.js in models folder
+in User.js write:
+
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+
+const userSchema = new Schema({
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        trim: true,
+        lowercase: true,
+        unique: true,
+        required: true
+    },
+    password: {
+        type: String,
+        trim: true,
+        minlength: 3,
+        maxlength: 255,
+        required: true
+    },
+    age: {
+        type: Number,
+        required: true
+    },
+    phone: Number,
+    picture: String,
+    active: Boolean,
+    favorites: []
+}, {
+    timestamps: true
+})
+
+module.exports = mongoose.model('User', userSchema)
+
+
+make Videos.js in models folder
+
+
