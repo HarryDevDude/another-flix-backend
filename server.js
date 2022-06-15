@@ -4,6 +4,10 @@ const app = express()
 require('dotenv').config()
 require('./config/database')
 
+// ===== MIDDLEWARE =====
+app.use(express.json())
+
+
 // ===== ROUTES =====
 // Movies
 app.use('/api/v1/movies', require('./routes/api/movies.js'))
