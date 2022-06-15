@@ -4,13 +4,14 @@ const app = express()
 require('dotenv').config()
 require('./config/database')
 
-// ===== MIDDLEWARE =====
+// ===== MIDDLEWARES =====
 app.use(express.json())
-
 
 // ===== ROUTES =====
 // Movies
-app.use('/api/v1/movies', require('./routes/api/movies.js'))
+app.use('/api/v1/movies', require('./routes/api/movies'))
+// Users
+app.use('/api/v1/users', require('./routes/api/users'))
 
 // ===== PORT =====
 const port = 8080

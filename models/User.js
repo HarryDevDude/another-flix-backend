@@ -44,7 +44,7 @@ const userSchema = new Schema({
         type: Number,
         required: true
     },
-    phone: Number,
+    phone: String,
     picture: String,
     active: Boolean,
     favorites: []
