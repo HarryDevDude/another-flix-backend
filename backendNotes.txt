@@ -25,7 +25,7 @@ app.listen(port, () => console.log(`Express app running on port ${port}`))
 run nodemon in terminal should say, "[nodemon] starting `node server.js`
 Express app running on port 8080"
 
-(we should should start with Video.js and ... before User.js because user.js is the most involved)
+(we should should start with Movie.js and ... before User.js because user.js is the most involved)
 make User.js in models folder
 in User.js write:
 
@@ -70,6 +70,58 @@ const userSchema = new Schema({
 module.exports = mongoose.model('User', userSchema)
 
 
-make Videos.js in models folder
+make Movie.js in models folder
 
+
+make first route in server.js
+// ===== ROUTES =====
+// Movies
+app.use('/api/v1/movies', require('./routes/api/movies.js'))
+
+Then make an 'api' folder in the 'routes' folder and make a file called 'movies.js" in that folder. Write this:
+const express = require('express')
+const router = express.Router()
+const moviesCtrl = require('../../controllers/api/movies')
+
+// GET /api/v1/movies
+router.get('/', moviesCtrl.index)
+
+module.exports = router
+
+
+Then make an 'api' folder in 'controllers' folder and make a file called 'movies.js" in that folder.  Write this:
+const Movie = require('../../models/Movie')
+
+// Find all movies
+const index = async (req, res) => {
+    try {
+        const movies = await Movie.find({})
+        res.status(200).json(movies)
+    } catch(e) {
+        res.status(400).json({msg: e.message})
+    }
+}
+
+module.exports = {
+    index
+}
+
+
+next rename 'utilities' folder to 'config'
+make a file called, 'database.js' in config folder. Write this code:
+const mongoose = require('mongoose')
+
+mongoose.connect(process.env.MONGO_URI)
+
+const db = mongoose.connection
+
+db.on('connected', () => {
+    console.log(`Connected to ${db.name} at ${db.host}:${db.port}.`)
+})
+
+connect the database 
+by entering the connection link from mongoDB with the connect option into the .env file. Change the <password> with actual password. Before the '?' enter a name for the database. Use the project name.
+
+Go to server.js and write:
+require('./config/database')
 
