@@ -47,7 +47,11 @@ const userSchema = new Schema({
     phone: String,
     picture: String,
     active: Boolean,
-    favorites: []
+    favorites: [
+      {
+        type: Schema.Types.ObjectId, ref: "Movie"
+      }
+    ]
 }, {
     timestamps: true
 })

@@ -14,12 +14,12 @@ router.post('/', usersCtrl.create)
 // GET - api/v1/users/:id
 router.get('/:id', usersCtrl.show)
 
-// User favorites
-// GET /api/v1/users/:id/favorites
-router.get('/:id/favorites', usersCtrl.getFavorites)
-
 // PUT - update (updates user info)
 // PUT - api/v1/users/:id
 router.put('/:id', usersCtrl.update)
+
+// User favorites
+// GET /api/v1/users/:id/favorites
+router.get('/:id/favorites', usersCtrl.getFavorites)
 
 module.exports = router
